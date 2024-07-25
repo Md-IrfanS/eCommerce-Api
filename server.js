@@ -1,25 +1,17 @@
 import express from "express";
-
+import productRoutes from './routes/products/products.routes.js';
+import connectDB from "./lib/db.js";
 const app = express();
-const PORT = 5362;
+const PORT = 5000;
+
+// Connect DB
+connectDB();
 
 app.get("/", (req, res) => {
   res.json({ message: "Hello server" });
 });
 
-// CRUD functionality of eCommerce
-
-// R - For Reading products
-app.get("/products", () => {});
-
-// C - For Creating products 
-app.post("/products", () => {});
-
-// U - For Updating products
-app.put("/products/:id", () => {});
-
-// D - For Deleting product
-app.delete("/products/:id", () => {});
+app.use("/products", productRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
